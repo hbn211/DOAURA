@@ -18,7 +18,7 @@ parentdir = dirname(currentdir)
 path.append(parentdir)
 from musicURA import musicURA
 
-csvfile = "\Solutions\ForSolve1m0.1T45P45NearFieldCA.csv"
+csvfile = "\Solutions\ForSolve.csv"
 
 if isfile(currentdir+csvfile):
 
@@ -35,7 +35,8 @@ if isfile(currentdir+csvfile):
             i = numdata[2*antenna,sample]           #I
             q = numdata[2*antenna+1,sample]         #Q
             x_iq[antenna,sample] = i+1j*q           #I+jQ
-
+    
+    Cm = None
     if(isfile(currentdir+"\\S.s"+str(num_antennas)+"p")):
         print("S parameters available for mutual coupling...\nWould you like to use? (y or n):")
         useS = input()
@@ -64,9 +65,7 @@ if isfile(currentdir+csvfile):
                 sel = 1
 
             Cm = identity(num_antennas) - Sparam[(int(sel)-1),:,:]
-
-    else:
-        Cm = None
+        
 
     #DO THE MAGIC
     print("Solving...")
